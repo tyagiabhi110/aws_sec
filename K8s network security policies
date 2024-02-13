@@ -10,6 +10,19 @@ spec:
   policyTypes:
   - Ingress
 
+# Create default allow all policy
+
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-all-ingress
+spec:
+  podSelector: {}
+  ingress:
+  - {}
+  policyTypes:
+  - Ingress
+
 # Create ingress/egress NetPol - for name space, pod, port matching rules, ip/cidr
 
 apiVersion: networking.k8s.io/v1
