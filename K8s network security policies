@@ -20,16 +20,16 @@ metadata:
 spec:
   podSelector:  #target pod
     matchLabels:
-      role: db
+      role: backend
   policyTypes:
   - Ingress
   - Egress
   ingress:
   - from:
     - ipBlock:
-        cidr: 172.17.0.0/16
+        cidr: 172.18.0.0/16
         except:
-        - 172.17.1.0/24
+        - 172.18.1.0/24
     - namespaceSelector:
         matchLabels:
           project: myproject
