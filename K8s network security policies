@@ -1,26 +1,22 @@
-.1 Network security policies
+Create default deny all NetworkPolicy & allow required traffic
 
-🔼 Back to top
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-ingress
+  namespace: default
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
 
-    Create default deny all NetworkPolicy & allow required traffic
-
-    apiVersion: networking.k8s.io/v1
-    kind: NetworkPolicy
-    metadata:
-      name: default-deny-ingress
-      namespace: default
-    spec:
-      podSelector: {}
-      policyTypes:
-      - Ingress
-
-Create ingress/egress NetPol - for ns, pod, port matching rules
+# Create ingress/egress NetPol - for ns, pod, port matching rules
 
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: test-network-policy
-  namespace: default  #target namespace
+  namespace: default  # Enter target namespace
 spec:
   podSelector:  #target pod
     matchLabels:
