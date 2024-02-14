@@ -1,4 +1,4 @@
-# Create default deny all NetworkPolicy & allow required traffic
+# Create default deny all NetworkPolicy 
 
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -23,6 +23,7 @@ spec:
   policyTypes:
   - Ingress
 
+# # Create default deny all NetworkPolicy & allow required traffic
 # Create ingress/egress NetPol - for name space, pod, port matching rules, ip/cidr
 
 apiVersion: networking.k8s.io/v1
@@ -60,3 +61,15 @@ spec:
     - protocol: TCP
       port: 5978
       endPort: 6000
+
+# Default deny all ingress and all egress traffic
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-all
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+  - Egress
+# Allow all egress traffic
