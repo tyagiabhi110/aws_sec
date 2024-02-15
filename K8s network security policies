@@ -10,6 +10,7 @@ spec:
   policyTypes:
   - Ingress
 
+
 # Create default allow all policy
 
 apiVersion: networking.k8s.io/v1
@@ -22,6 +23,7 @@ spec:
   - {}
   policyTypes:
   - Ingress
+
 
 # # Create default deny all NetworkPolicy & allow required traffic
 # Create ingress/egress NetPol - for name space, pod, port matching rules, ip/cidr
@@ -62,6 +64,7 @@ spec:
       port: 5978
       endPort: 6000
 
+
 # Default deny all ingress and all egress traffic
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -86,7 +89,8 @@ spec:
   policyTypes:
   - Egress
 
-# Target multiple namespaces by label 
+
+# Target multiple namespaces by label
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
@@ -104,6 +108,7 @@ spec:
         - key: namespace
           operator: In
           values: ["frontend", "backend"]
+
 
 # Target a range of ports
 apiVersion: networking.k8s.io/v1
