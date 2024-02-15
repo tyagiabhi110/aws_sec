@@ -129,6 +129,27 @@ spec:
       ports:
         - protocol: TCP
           port: 32000
+          endPort: 32768
 
 # Protect node metadata and endpoints with NetworkPolicy
-          endPort: 32768
+
+    Restrict control plane ports (6443, 2379, 2380, 10250, 10251, 10252)
+    Restrict worker node ports(10250, 30000-32767)
+    for Cloud, Using Kubernetes network policy to restrict pods access to cloud metadata
+
+Example assumes AWS cloud, and metadata IP address is 169.254.169.254 should be blocked while all other external addresses are not.
+
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: deny-only-cloud-metadata-access
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - ipBlock:
+      cidr: 0.0.0.0/0
+      except:
+      - 169.254.169.254/32
