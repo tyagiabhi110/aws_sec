@@ -44,6 +44,19 @@ eksctl create cluster --name cluster-name  \
 --nodes-max 2 \ 
 --zones <AZ-1>,<AZ-2>
 
+example:
+eksctl create cluster --name valaxy-cluster \
+   --region ap-south-1 \
+--node-type t2.small \
+
+To delete the EKS clsuter
+
+eksctl delete cluster valaxy --region ap-south-1
+
+Validate your cluster using by creating by checking nodes and by creating a pod
+
+kubectl get nodes
+
 
 kubectl run pod tomcat --image=tomcat 
 
