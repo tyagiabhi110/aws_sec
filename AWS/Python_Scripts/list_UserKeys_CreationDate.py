@@ -37,6 +37,10 @@ with open("accounts.txt") as accounts:
                             print("---------------------------------------------------")
                             print(username, "\t\t", creation_time)
                             print("\n")
+                            print("Generating New Key")
+                            #new_key = client.create_access_key(UserName=username)
+                            print("Deleting old key")
+                            #client.delete_access_key(UserName=username, AccessKeyId=old_access_key)
                         else:
                             print("Key rotation not required for user: ", username)
                             print("\n")
