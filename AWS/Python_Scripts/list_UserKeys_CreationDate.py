@@ -4,7 +4,11 @@ import boto3
 
 DEBUG = 0
 
-with open("../accounts.txt") as accounts:
+from datetime import date
+
+today = date.today()
+print("Today's date:", today)
+with open("accounts.txt") as accounts:
     for account in accounts:
         try:
             session = boto3.Session(profile_name=account.rstrip('\n').rstrip(),region_name="eu-west-1")
@@ -18,10 +22,23 @@ with open("../accounts.txt") as accounts:
                 else:
                     access_key_response = client.list_access_keys(UserName=user_name)
                     for key in access_key_response["AccessKeyMetadata"]:
-                        creation_time = key['CreateDate']
+                        creation_time = key['CreateDate'].date()
                         username = key['UserName']
-                        print("User Name \t\t\t\t Access_Key_Creation_Date")
-                        print("---------------------------------------------------")
-                        print(username, "\t\t", creation_time)
+                        old_access_key = key['AccessKeyId']
+                        #print("User Name \t\t\t\t Access_Key_Creation_Date")
+                        #print("---------------------------------------------------")
+                        #print(username, "\t\t", creation_time)
+                        delta = today - creation_time
+                        # print(delta.date())
+                        delta_days = delta.days
+                        if delta_days >= 90:
+                            print("Key is older than 90 days pls rotate asap for user: ", username)
+                            print("User Name \t\t\t\t Access_Key_Creation_Date")
+                            print("---------------------------------------------------")
+                            print(username, "\t\t", creation_time)
+                            print("\n")
+                        else:
+                            print("Key rotation not required for user: ", username)
+                            print("\n")
         except ClientError as e:
                 print("e")
