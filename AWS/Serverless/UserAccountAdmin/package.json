@@ -1,0 +1,18 @@
+{
+  "name": "useraccountadmin",
+  "version": "1.0.0",
+  "description": "Configures user account admin settings",
+  "main": "handler.py",
+  "dependencies": {},
+  "devDependencies": {
+    "serverless": "^3.35.2",
+    "serverless-plugin-aws-alerts": "^1.7.5"
+  },
+  "scripts": {
+    "deploy": "sls deploy",
+    "undeploy": "sls remove",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Abhishek Tyagi",
+  "license": "ISC"
+}

@@ -1,0 +1,55 @@
+service: useraccountadmin
+
+plugins:
+  - serverless-plugin-aws-alerts
+
+package:
+  #include: # Specify the directories and files which should be included in the deployment package for this specific function.
+  #  - src/**
+  #  - handler.js
+  exclude: # Specify the directories and files which should be excluded in the deployment package for this specific function.
+    - node_modules/**
+    - package.json
+    - package-lock.json
+    - node_modules
+
+provider:
+  name: aws
+  runtime: python3.11
+  # Stage 
+  stage: ${opt:stage, 'prod'} # Set the default stage used. Default is dev
+  # Lambda properties
+  timeout: 900 # optional, in seconds, default is 6
+  memorySize: 128 # Overwrite the default memory size. Default is 1024
+  # Cloudwatch settings
+  logRetentionInDays: 14 # Set the default RetentionInDays for a CloudWatch LogGroup
+  # S3 Bucket Public Access set to True
+  deploymentBucket:
+    blockPublicAccess: true
+
+#  region
+  region: eu-west-1
+
+# you can add statements to the Lambda function's IAM Role here
+  iamManagedPolicies: # Optional IAM Managed Policies, which allows to include the policies into IAM Role
+    - arn:aws:iam::aws:policy/AWSOrganizationsReadOnlyAccess
+    - arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess
+    - arn:aws:iam::aws:policy/AmazonEC2FullAccess
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "sts:AssumeRole"
+      Resource: "arn:aws:iam::*:role/OrganizationAccountAccessRole"
+    - Effect: "Allow"
+      Action:
+        - "ses:SendEmail"
+        - "ses:SendRawEmail"
+      Resource: "*"
+  stackTags: ${file(../../../tagsserverless.yml)}
+
+functions:
+  lambda:
+    description: Undertakes admin on users and emails them (e.g. non MFA or password reset needed)
+    handler: handler.lambda_handler
+    events:
+      - schedule: cron(0 1 * * ? *)
