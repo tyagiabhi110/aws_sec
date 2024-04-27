@@ -1,0 +1,244 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&effect=anaglyph');
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: black;
+    color: #ffffff;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    flex-direction: row;
+}
+
+#patch-container {
+    width: 100%;
+}
+
+#header {
+    display: flex;
+    flex-direction: row;
+    align-content: stretch;
+
+    border-bottom: 1px solid #404040;
+}
+
+#header > div {
+    flex: 1 100%;
+}
+
+#legend { 
+    text-align: center;
+    margin: 8px;
+}
+
+#legend > span { 
+    margin: 10px;
+    font-size: 14px;
+}
+
+#account-container {
+  display: grid;
+  grid-gap: 3px 3px;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 200px));
+}
+
+#patch-container div.nodata {
+    font-size: 128px;
+    text-align: center;
+    margin: auto;
+    background-color: red;
+    animation: blinker 2s linear infinite;  
+}
+
+.account {
+    padding: 2px;
+}
+
+.account .title {
+    font-size: 18px;
+    margin: 0;
+}
+
+.regions-container {
+    display: flex;
+    flex-direction: row;
+    align-content: stretch;
+}
+
+.region {
+    flex: 1 100%;
+    border: 1px solid #7f7f7f;
+    padding: 1px;
+    margin: 1px;
+}
+
+.region.wide {
+    flex-grow: 2;
+}
+
+.region .title {
+    font-size: 11px;
+    margin: 0;
+}
+
+.instances-container {
+    margin-top: 1px;
+    display: grid;
+    grid-gap: 1px 1px;
+    grid-template-columns: repeat(auto-fill, 18px);
+}
+
+.instance {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #c0c0c0;
+    text-align: center;
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 18px;
+}
+
+#legend > span {
+    white-space: nowrap;
+}
+
+#legend div.instance {
+    display: inline-block;
+}
+
+.instance.compliant {
+    background-color: #00ff00;
+    color: #000000;
+}
+
+.instance.missing-patches-within-policy {
+    background-color: #ffff00;
+    color: #000000;
+}
+
+.instance.missing-patches {
+    background-color: #ff0000;
+}
+
+.instance.missing-patches.superbad {
+    color: black;
+    background-color: #ff4040;
+    background-image: repeating-linear-gradient(135deg, #ff4040 0 4px, #ff7f7f 4px 6px);
+}
+
+.instance.missing-patches.hyperbad {
+    color: black;
+    background-color: #ff4040;
+    background-image: repeating-linear-gradient(135deg, #ff4040 0 4px, #ff7f7f 4px 6px);
+    animation: blinker 2s linear infinite;  
+}
+
+@keyframes blinker {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  20% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+}
+
+.instance.missing-ssm {
+    background-color: #4040ff;
+}
+
+.instance.missing-ssm.launched-ages-ago {
+    background-color: #4040ff;
+    background-image: linear-gradient(135deg, #4040ff 50%, #ff0000 50%);
+}
+
+.instance.missing-ssm.stopped {
+    border: 1px solid #7f7f7f;
+    background-color: #00007f;
+    background-image: linear-gradient(135deg, #404040 75%, #00007f 75%);
+    color: #a0a0a0;
+}
+
+.instance.missing-patches.stopped {
+    border: 1px solid #7f7f7f;
+    background-color: #7f0000;
+    background-image: linear-gradient(135deg, #404040 75%, #7f0000 75%);
+    color: #a0a0a0;
+}
+
+.instance.compliant.stopped {
+    border: 1px solid #7f7f7f;
+    background-color: #007f00;
+    background-image: linear-gradient(135deg, #404040 75%, #007f00 75%);
+    color: #a0a0a0;
+}
+
+#money-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #404040;
+  margin-top: 256px;
+}
+
+#title {
+    font-size: 32px;
+}
+
+#money {
+    text-align: center; 
+}
+
+#money-total {
+    font-size: 72px;
+}
+
+#money-total-note {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#money-perhour {
+    font-size: 20px;
+}
+
+#subtitle {
+    margin-top: 48px;
+    font-size: 32px;
+}
+
+#percentage-change {
+    font-size: 80px;
+}
+
+#money-estimated, #money-lastmonth {
+    font-size: 80px;
+}
+
+#brexit { 
+    font-size: 24px;
+}
+
+#money-total-digits span.zero {
+    color: #ffffff;
+    transition: color 0.1s ease-in;
+}
+
+#money-total-digits span {
+    transition-delay: 0.25s;
+    transition: color 1s ease-out;
+}

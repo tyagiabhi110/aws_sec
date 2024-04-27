@@ -1,0 +1,93 @@
+html_content = """
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>overwatch</title>
+    <link rel="stylesheet" href="site.css">
+    <script src="jquery-3.3.1.min.js"></script>
+    <script src="index.js"></script>
+</head>
+
+<body>
+    <div id="patch-container">
+        <div id="header">
+            <div>
+                <h1>AWS EC2 instances and patch status</h1>
+                <p id="lastUpdated"></p>
+            </div>
+            <div style="text-align: center;">
+                <span style="font-size: 72px;">
+                    <span id="compliantpct"></span>%<br>
+                </span>
+                <span>
+                    <span><span id="numInstances"></span> instances,</span>
+                    <span><span id="numRunningInstances"></span> running,</span><br>
+                    <span><span id="compliant"></span> fully patched or within Patch Compliance Policy (release + 30
+                        days).</span><br>
+                    <span><span id="missingSsm"></span> SSM missing or failing.</span>
+                </span>
+            </div>
+            <div id="legend">
+                <table style="text-align: left; white-space: nowrap;">
+                    <tr>
+                        <td>
+                            <div class="instance compliant"></div>
+                            running + patched
+                        </td>
+                        <td>
+                            <div class="instance compliant stopped"></div>
+                            stopped + patched at last report
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="instance missing-patches-within-policy">5</div>
+                            running + missing patches but still compliant <br><small>(number = age in days of oldest
+                                missing patch)</small>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="instance missing-patches">38</div>
+                            running + missing patches and non-compliant
+                        </td>
+                        <td>
+                            <div class="instance missing-patches stopped"></div>
+                            stopped + missing patches at last report
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="instance missing-patches superbad">65</div>
+                            running + missing &gt;60 days of patches
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="instance missing-ssm"></div>
+                            running + missing or failing SSM</small>
+                        </td>
+                        <td>
+                            <div class="instance missing-ssm stopped"></div>
+                            stopped + no record in SSM logs
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="instance missing-ssm launched-ages-ago"></div>
+                            running + missing or failing SSM for more than 24 hours</small>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div id="account-container">
+        </div>
+
+    </div>
+</body>
+
+</html>
+"""

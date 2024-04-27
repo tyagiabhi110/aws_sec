@@ -133,11 +133,11 @@ spec:
 
 # Protect node metadata and endpoints with NetworkPolicy
 
-    Restrict control plane ports (6443, 2379, 2380, 10250, 10251, 10252)
-    Restrict worker node ports(10250, 30000-32767)
-    for Cloud, Using Kubernetes network policy to restrict pods access to cloud metadata
+#     Restrict control plane ports (6443, 2379, 2380, 10250, 10251, 10252)
+#     Restrict worker node ports(10250, 30000-32767)
+#     for Cloud, Using Kubernetes network policy to restrict pods access to cloud metadata
 
-Example assumes AWS cloud, and metadata IP address is 169.254.169.254 should be blocked while all other external addresses are not.
+# Example assumes AWS cloud, and metadata IP address is 169.254.169.254 should be blocked while all other external addresses are not.
 
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
